@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PROFILE</title>
+  <meta name="description" content="Personal Profile Card">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Particle Background -->
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- Scan Line Overlay -->
+  <div class="scanline-overlay"></div>
+
+  <div class="container">
+    <!-- Main Profile Card -->
+    <div class="profile-card">
+      <!-- Header Bar -->
+      <div class="card-header">
+        <div class="header-dots">
+          <span class="dot dot-red"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+        </div>
+        <div class="header-title">PROFILE_DATA.sys</div>
+        <div class="header-status">
+          <span class="status-indicator"></span>
+          ONLINE
+        </div>
+      </div>
+
+      <div class="card-body">
+        <!-- Left: Avatar Section -->
+        <div class="avatar-section">
+          <a href="https://discordapp.com/users/1482781874542743583" target="_blank" rel="noopener noreferrer" class="avatar-container">
+            <div class="avatar-ring"></div>
+            <div class="avatar-ring ring-2"></div>
+            <div class="avatar-inner">
+            </div>
+            <div class="avatar-glitch" data-text="USR">USR</div>
+          </a>
+          <div class="location-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            KUMAMOTO, JP
+          </div>
+        </div>
+
+        <!-- Right: Data Section -->
+        <div class="data-section">
+          <!-- Birth & Age -->
+          <div class="data-group">
+            <div class="data-label">
+              <span class="label-icon">▸</span> BIRTH_DATE
+            </div>
+            <div class="data-value">
+              <span class="value-main">2012.01.19</span>
+            </div>
+          </div>
+
+          <div class="data-group">
+            <div class="data-label">
+              <span class="label-icon">▸</span> AGE
+            </div>
+            <div class="data-value">
+              <span class="value-main" id="age-value">--</span>
+              <span class="value-unit auto-badge">AUTO</span>
+            </div>
+          </div>
+
+          <div class="data-divider"></div>
+
+          <!-- Physical Stats -->
+          <div class="stats-row">
+            <div class="stat-item">
+              <div class="stat-label">HEIGHT</div>
+              <div class="stat-value">
+                <span class="stat-num">143.5</span>
+                <span class="stat-unit">cm</span>
+              </div>
+              <div class="stat-bar">
+                <div class="stat-bar-fill" style="width: 60%"></div>
+              </div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-label">WEIGHT</div>
+              <div class="stat-value">
+                <span class="stat-num">44.6</span>
+                <span class="stat-unit">kg</span>
+              </div>
+              <div class="stat-bar">
+                <div class="stat-bar-fill" style="width: 50%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="stats-row">
+            <div class="stat-item">
+              <div class="stat-label">BMI</div>
+              <div class="stat-value">
+                <span class="stat-num" id="bmi-value">--</span>
+                <span class="value-unit auto-badge">AUTO</span>
+              </div>
+              <div class="stat-bar">
+                <div class="stat-bar-fill" id="bmi-bar" style="width: 0%"></div>
+              </div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-label">STATUS</div>
+              <div class="stat-value">
+                <span class="stat-num bmi-status" id="bmi-status">--</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- SPEC Table -->
+          <div class="data-divider"></div>
+          <div class="spec-section">
+            <div class="data-label">
+              <span class="label-icon">▸</span> SPEC_TABLE
+            </div>
+            <table class="spec-table">
+              <tbody>
+                <tr>
+                  <td class="spec-key">Rohrer</td>
+                  <td class="spec-val" id="rohrer-value">--</td>
+                  <td class="spec-badge auto-badge">AUTO</td>
+                </tr>
+                <tr>
+                  <td class="spec-key">BSA</td>
+                  <td class="spec-val" id="bsa-value">--</td>
+                  <td class="spec-badge auto-badge">AUTO</td>
+                </tr>
+                <tr>
+                  <td class="spec-key">基礎代謝</td>
+                  <td class="spec-val" id="bmr-value">--</td>
+                  <td class="spec-badge auto-badge">AUTO</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notice Section -->
+      <div class="notice-section">
+        <div class="notice-header">
+          <span class="label-icon">▸</span> NOTICE
+          <span class="notice-blink">_</span>
+        </div>
+        <div class="notice-content" id="notice-content">
+          <span class="notice-text typing-effect">私は4月を持ってネットの使い道を、自鯖とDMだけに限定させていただきます。ありがとうございました。フレンドは継続する予定でございますので、ご安心を。</span>
+        </div>
+      </div>
+
+      <!-- Discord Section -->
+      <div class="discord-section">
+        <div class="discord-header">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="discord-icon">
+            <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286z"/>
+          </svg>
+          DISCORD SERVERS
+          <span class="discord-legend">
+            <span class="discord-stat"><span class="stat-dot member-dot"></span>members</span>
+            <span class="discord-stat"><span class="stat-dot bot-dot"></span>bots</span>
+          </span>
+        </div>
+        <div class="discord-cards">
+          <a href="https://x.gd/RXDwF" target="_blank" rel="noopener noreferrer" class="discord-card" id="discord-card-1">
+            <div class="discord-card-glow"></div>
+            <div class="discord-card-content">
+              <div class="discord-server-name">さんさば</div>
+              <div class="discord-role">
+                <span class="role-badge owner">鯖主</span>
+              </div>
+              <div class="discord-stats">
+                <span class="discord-stat"><span class="stat-dot member-dot"></span>~10</span>
+                <span class="discord-stat"><span class="stat-dot bot-dot"></span>~15</span>
+              </div>
+              <div class="discord-join">JOIN →</div>
+            </div>
+          </a>
+          <a href="https://x.gd/a7MHdw" target="_blank" rel="noopener noreferrer" class="discord-card" id="discord-card-2">
+            <div class="discord-card-glow"></div>
+            <div class="discord-card-content">
+              <div class="discord-server-name">おねむさば2</div>
+              <div class="discord-role">
+                <span class="role-badge admin">元鯖主</span>
+              </div>
+              <div class="discord-stats">
+                <span class="discord-stat"><span class="stat-dot member-dot"></span>~90</span>
+                <span class="discord-stat"><span class="stat-dot bot-dot"></span>~20</span>
+              </div>
+              <div class="discord-join">JOIN →</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="card-footer">
+        <div class="footer-line"></div>
+        <div class="footer-text">
+          <span id="current-time">--:--:--</span>
+          <span class="footer-sep">|</span>
+          <span>SYS_OK</span>
+          <span class="footer-sep">|</span>
+          <span id="uptime">0s</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
