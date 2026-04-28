@@ -65,6 +65,7 @@ function updateProfileData() {
   const rohrer = calcRohrer(CONFIG.weight, CONFIG.height);
   const bsa = calcBSA(CONFIG.weight, CONFIG.height);
   const bmr = calcBMR(CONFIG.weight, CONFIG.height, age.years);
+  const specDiff = CONFIG.height - CONFIG.weight;
 
   // Age
   document.getElementById('age-value').textContent =
@@ -86,6 +87,7 @@ function updateProfileData() {
   document.getElementById('rohrer-value').textContent = rohrer.toFixed(2);
   document.getElementById('bsa-value').textContent = bsa.toFixed(4) + ' m²';
   document.getElementById('bmr-value').textContent = Math.round(bmr) + ' kcal';
+  document.getElementById('spec-diff-value').textContent = specDiff.toFixed(1);
 }
 
 // ===== CLOCK =====
