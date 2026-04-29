@@ -2,7 +2,7 @@
 const CONFIG = {
   birthday: new Date(2012, 0, 19), // 2012/01/19
   height: 143.5,  // cm
-  weight: 44.6,   // kg
+  weight: 44.0,   // kg
 };
 
 // ===== AGE CALCULATION =====
